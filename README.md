@@ -9,4 +9,4 @@
 
 ![Каталог мебели](./images/example_price.png)  
 # Код
-Подробнее про код можно узнать в [code/app.md](./code/app.md) и [code/database.md](./code/database.md).
+Подробнее про код можно узнать в [`code/app.md`](./code/app.md) и [`code/database.md`](./code/database.md).
