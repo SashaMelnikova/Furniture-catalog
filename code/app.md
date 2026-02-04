@@ -2,7 +2,7 @@
 Данный файл отвечает за обеспечение функциональности приложения и взаимодействия пользователя с ним.  
 В нём создаётся класс `FurnitureCatalog`, который содержит в себе методы класса, отвечающие за подсоединение базы данных к файлу, осуществление фильтрации данных по SQL-запросам, вывод результатов.
 ## Методы класса
-```
+```rust
 def __init__(self, db_path: str = "furniture.db"):
         self.db_path = db_path
 
@@ -12,7 +12,7 @@ def _db_connection(self):
 Метод `def __init__` инициализирует путь к базе данных, а `def _db_connection` создаёт соединение к ней.
 Далее идут методы, отвечающие за фильтрацию данных:
 * **def get_catalog**
-```
+```rust
 def get_catalog(self):
         with self._db_connection() as conn:
             cursor = conn.cursor()
@@ -24,26 +24,26 @@ def get_catalog(self):
 `return cursor.fetchall()` - Возвращает результаты запроса.  
 Все методы класса, отвечающие за фильтрацию имеет одинаковую структуру, где отличаются только SQL-запросы, поэтому далее будут рассмотрены только они.
 * **def search_furniture_by_available**
-```
+```rust
 cursor.execute("SELECT * FROM furniture WHERE available = 1")
 ```
 Выбирает только те строки, где в полях столбца `available` указано значение "1", т.е товар есть в наличии.
 * **def search_furniture_by_category**
-```
+```rust
 cursor.execute("SELECT * FROM furniture WHERE category = ?", (category,))
 ```
 Выбирает только те строки, где поля столбца `category` соответствуют запросу пользователя. Например только те товары, которые относятся к категории "Кровати".
 * **def search_furniture_by_price**
-```
+```rust
 cursor.execute("SELECT * FROM furniture WHERE price BETWEEN ? AND ?", (min_price, max_price))
 ```
 Выбирает только те строки, где цена товара находится в указанном пользователем диапазоне.
 * **search_furniture_by_material**
-```
+```rust
 cursor.execute("SELECT * FROM furniture WHERE material LIKE ?", (f'%{material}%',))
 ```
 Выбирает только те строки, где в материалах есть тот, который указан пользователем. Переменная `material` указана между знаком %, т.к в поле может через запятую быть указано несколько материалов, которые является целой строкой.
-```
+```rust
 def display(self, furniture_list: List[tuple]):
         if not furniture_list:
             print("Мебель не найдена")
@@ -59,7 +59,7 @@ def display(self, furniture_list: List[tuple]):
 ```
 Отвечает за красивый вывод данных в консоль. Также если нет соответствующего запросу пользователя результата, то программа сообщит об этом.
 ## Взаимодействие через консоль
-```
+```rust
 catalog_app = FurnitureCatalog()
 while(True):
     print("1 - Показать весь каталог\n"
